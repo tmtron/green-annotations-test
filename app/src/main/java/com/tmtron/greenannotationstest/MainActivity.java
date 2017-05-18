@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onStart() {
+        // just a test for issue #13: https://github.com/tmtron/green-annotations/issues/13
         Toast.makeText(getApplicationContext(), "Before Start", Toast.LENGTH_SHORT).show();
         super.onStart();
     }
-
 
     @Click
     void btnTest() {
