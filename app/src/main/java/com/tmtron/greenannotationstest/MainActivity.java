@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.tmtron.greenannotations.EventBusGreenRobot;
 
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
@@ -22,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
     @EventBusGreenRobot
     EventBus eventBus;
 
+    @Bean
+    BeanTest beanTest;
+
     @Override
     public void onStart() {
         // just a test for issue #13: https://github.com/tmtron/green-annotations/issues/13
@@ -32,12 +36,13 @@ public class MainActivity extends AppCompatActivity {
     @Click
     void btnTest() {
         eventBus.post(new MessageEvent("+."));
+        beanTest.fireEvent();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
         Toast.makeText(getApplicationContext(), event.getMessage(), Toast.LENGTH_SHORT).show();
-        tvMain.setText(tvMain.getText()+"-.");
+        tvMain.setText(tvMain.getText()+event.getMessage());
     }
 
 }
